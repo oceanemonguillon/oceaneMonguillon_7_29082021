@@ -1,18 +1,21 @@
+//import du package mysql
 const mysql = require('mysql');
 
 // Connexion à MYSQL
 const bdd = mysql.createConnection({
-  host     : 'localhost',
-  user     : 'root',
-  password : '',
-  database : 'bddGroupomania'
+  host: '192.168.64.2',
+  user: 'root',
+  password: '',
+  database: 'bddGroupomania'
 });
 
-//verification
-connection.connect ((err) => {
-    if (err) throw err;
-    console.log ('Connecté!');
-  });
+//verification du fonctionnement
+bdd.connect((err) => {   
+    if (err) {    
+        throw err;
+    }
+    console.log('Connecté a mysql');
+});
 
-//exportation bdd
+//export bdd
 module.exports = bdd;
