@@ -1,9 +1,9 @@
 //import du package express
 const express = require("express");
+//import du package bodyparser
+const bodyParser = require('body-parser');
 //import du chemin des fichiers images
 const path = require("path");
-//import du router d'authentification (auth.js)
-const authRoutes = require("./routes/auth");
 //import du router utilisateur (user.js)
 const userRoutes = require("./routes/users");
 //import du router de posts (posts.js)
@@ -22,14 +22,15 @@ app.use((req, res, next) => {
     next();
 });
 
+//le corp envoyé sera traduit en json
+app.use(bodyParser.json());
 
 //Fonction pour toutes requetes envoyées a images, on sert de manière statique le dossier images
 app.use("/images", express.static(path.join(__dirname, "images")));
 
 //Début des URL liés aux fichiers en question
-app.use("/auth", authRoutes);
-app.use("/profile", userRoutes);
-app.use("/posts", postRoutes);
+app.use("/api/user", userRoutes);
+app.use("/api/posts", postRoutes);
 
 
 //Export de l'app express pour y avoir accès depuis les autres fichiers
