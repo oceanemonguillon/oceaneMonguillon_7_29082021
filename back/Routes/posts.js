@@ -24,7 +24,7 @@ router.post('/:id/like', auth, postsCtrl.likePost);
 //fonction permettant de commenter un post
 router.post('/:id/comment', auth, postsCtrl.commentPost);
 //fonction permettant de recuperer un commentaire
-router.get('/:id/comment', auth, postsCtrl.getOneComment);
+router.get('/:id/comment', auth, postsCtrl.getComments);
 //fonction permettant de supprimer un commentaire
 router.delete('/:id/comment', auth, postsCtrl.deleteComment);
 
