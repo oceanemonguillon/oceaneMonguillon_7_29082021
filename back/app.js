@@ -30,7 +30,7 @@ app.use("/images", express.static(path.join(__dirname, "images")));
 
 //Début des URL liés aux fichiers en question
 app.use("/user", userRoutes);
-//app.use("/posts", postRoutes);
+app.use("/posts", postRoutes);
 
 
 //Export de l'app express pour y avoir accès depuis les autres fichiers
