@@ -66,3 +66,66 @@ exports.login = (req, res, next) => {
 });
 }
 
+
+//Fonction qui permet de recuperer les infos d'un utilisateur
+exports.getOneUser = (req, res, next) => {
+    //recuperation des infos correspondant à l'id
+    let getOneUserQuery = 'SELECT email, picture_url FROM users where id = '+ bdd.escape(req.params.id);
+    //retourne email et photo de l'utilisateur
+    bdd.query(getOneUserQuery, function (err, result) {
+      if (err) throw err;
+      else {
+        if(result.length > 0) {
+          res.status(200).json({
+              email: result[0].email,
+              pictureUrl: result[0].picture_url,
+            })
+          }
+        else {res.status(401).json({ error: "L'utilisateur n'a pas été trouvé !" });} //si erreur: message
+      }
+    })
+  }
+  
+  
+//Fonction qui permet la modification des infos utilisateur
+exports.modifyUser = (req, res, next) => {
+    //recuperation de l'url de l'image
+    const pictureUrl = `${req.protocol}://${req.get('host')}/images/${req.file.filename}`;
+    const pictureQuery = "SELECT picture_url FROM users where id = "+ req.params.id;
+    //si erreur: message, sinon on continue
+    bdd.query(pictureQuery, function (err, result) {
+      if (err) {res.status(400).json({ error : err.code });}
+      else {
+        //modification de l'image avec suppression de l'ancienne photo
+        const oldPictureUrl = result[0].picture_url.split('/images/')[1];
+        const modifyPictureQuery = "UPDATE users SET picture_url = '"+pictureUrl+"' WHERE id = "+ req.params.id;
+        bdd.query(modifyPictureQuery, function (err, result) {
+          if (err) {res.status(400).json({ error : err.code });}
+          else {
+            fs.unlink(`images/${oldPictureUrl}`, () => {res.status(200).json({ message: 'Votre photo à été modifiée !'});})
+          }
+        })
+      }
+    })
+  }
+  
+  
+//Fonction qui permet d'effacer un utilisateur de la bdd
+exports.deleteUser = (req, res, next) => {
+    //Recuperation de l'url de l'image dans la bdd
+    const deletePictureQuery = "SELECT picture_url FROM users where id = "+ req.params.id;
+    //suppression de l'image correspondante dans le dossier images
+    bdd.query(deletePictureQuery, function (err, result) {
+      if (err) {res.status(400).json({ error : err.code });}
+      else {
+        const filename = result[0].picture_url.split('/images')[1];
+        fs.unlink(`images/${filename}`, () => { //suppression de l'utilisateur complet
+          let deleteQuery = "DELETE FROM users where id = " + req.params.id;
+            bdd.query(deleteQuery, function (err, result) {
+              if (err) {res.status(400).json({ error : err.code });}
+              else {res.status(200).json({ message: 'Votre compte utilisateur à été supprimé !'});}
+          })
+        })
+      }
+    })
+  }

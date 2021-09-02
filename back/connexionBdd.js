@@ -9,13 +9,5 @@ const bdd = mysql.createConnection({
   database: 'bddGroupomania'
 });
 
-//verification du fonctionnement
-bdd.connect((err) => {   
-    if (err) {    
-        throw err;
-    }
-    console.log('Connecté a mysql');
-});
-
 //export bdd
 module.exports = bdd;

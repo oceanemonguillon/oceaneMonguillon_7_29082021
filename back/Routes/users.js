@@ -7,7 +7,7 @@ const userCtrl = require("../controllers/users");
 //Import du middleware de gestion des images (multer-config)
 const multer = require('../middleware/multer-config');
 //Import du middleware de sécurisation des routes (auth)
-const authAdmin = require('../middleware/authAdmin');
+const auth = require('../middleware/auth');
 
 
 
@@ -16,11 +16,11 @@ router.post('/signup', multer, userCtrl.signup);
 //fonction permettant de se connecter sur l'app
 router.post('/login', userCtrl.login);
 //fonction permettant de recuperer les infos d'un utilisateur
-router.get('/:id', authAdmin, userCtrl.getOneUser);
+router.get('/:id', auth, userCtrl.getOneUser);
 //fonction permettant de modifier l'utilisateur
-router.put('/:id', authAdmin, multer, userCtrl.modifyUser);
+router.put('/:id', auth, multer, userCtrl.modifyUser);
 //fonction permettant de supprimer un utilisateur
-router.delete('/:id', authAdmin, userCtrl.deleteUser);
+router.delete('/:id', auth, userCtrl.deleteUser);
 
 
 //Export du router
