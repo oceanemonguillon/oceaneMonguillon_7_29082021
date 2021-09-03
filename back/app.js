@@ -8,7 +8,6 @@ const path = require("path");
 const userRoutes = require("./routes/users");
 //import du router de posts (posts.js)
 const postRoutes = require("./routes/posts");
-const bdd = require("./connexionBdd");
 
 
 // Initialisation de l'app avec express

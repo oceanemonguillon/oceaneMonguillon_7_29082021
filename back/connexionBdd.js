@@ -6,7 +6,8 @@ const bdd = mysql.createConnection({
   host: '192.168.64.2',
   user: 'oceane3',
   password: 'password',
-  database: 'bddGroupomania'
+  database: 'bddGroupomania',
+  namedPlaceholders: true,
 });
 
 //verification du fonctionnement

@@ -20,7 +20,7 @@ exports.signup = (req, res, next) => {
     if (Regexmdp.test(userInformations.password)) { //Si regex respecté
       bcrypt.hash(userInformations.password, 10) //mdp hashé 10x
       .then((hash) => { //Requête d'insertion des données dans la bdd
-        let signupQuery = "INSERT INTO users VALUES (NULL,'" + userInformations.email + "','" + hash + "','" + userInformations.pseudo + "','"+imageUrl+"')";
+        let signupQuery = "INSERT INTO users VALUES (NULL,'" + userInformations.pseudo + "','" + hash + "','" + userInformations.email + "','"+imageUrl+"',NULL)";
         
         bdd.query(signupQuery, function (err, result) { //vérifie que l'utilisateur n'existe pas déjà
           if (!err) {
@@ -44,7 +44,7 @@ exports.signup = (req, res, next) => {
 //fonction qui permet de se connecter a l'application
 exports.login = (req, res, next) => {
   //Requête de séléction des données correspondantes à l'adresse email entrée
-  let loginQuery = "SELECT * FROM users where email = '" + req.body.email + "'";
+  let loginQuery = "SELECT * FROM users WHERE email = '" + req.body.email + "'";
 
   bdd.query(loginQuery, function (err, result) { //Vérifie que l'utilisateur existe bien 
     if (err) throw err;
@@ -70,7 +70,7 @@ exports.login = (req, res, next) => {
 //Fonction qui permet de recuperer les infos d'un utilisateur
 exports.getOneUser = (req, res, next) => {
     //recuperation des infos correspondant à l'id
-    let getOneUserQuery = 'SELECT email, picture_url FROM users where id = '+ bdd.escape(req.params.id);
+    let getOneUserQuery = 'SELECT email, picture_url FROM users WHERE id = '+ bdd.escape(req.params.id);
     //retourne email et photo de l'utilisateur
     bdd.query(getOneUserQuery, function (err, result) {
       if (err) throw err;
@@ -91,7 +91,7 @@ exports.getOneUser = (req, res, next) => {
 exports.modifyUser = (req, res, next) => {
     //recuperation de l'url de l'image
     const pictureUrl = `${req.protocol}://${req.get('host')}/images/${req.file.filename}`;
-    const pictureQuery = "SELECT picture_url FROM users where id = "+ req.params.id;
+    const pictureQuery = "SELECT picture_url FROM users WHERE id = "+ req.params.id;
     //si erreur: message, sinon on continue
     bdd.query(pictureQuery, function (err, result) {
       if (err) {res.status(400).json({ error : err.code });}
@@ -113,14 +113,14 @@ exports.modifyUser = (req, res, next) => {
 //Fonction qui permet d'effacer un utilisateur de la bdd
 exports.deleteUser = (req, res, next) => {
     //Recuperation de l'url de l'image dans la bdd
-    const deletePictureQuery = "SELECT picture_url FROM users where id = "+ req.params.id;
+    const deletePictureQuery = "SELECT picture_url FROM users WHERE id = "+ req.params.id;
     //suppression de l'image correspondante dans le dossier images
     bdd.query(deletePictureQuery, function (err, result) {
       if (err) {res.status(400).json({ error : err.code });}
       else {
         const filename = result[0].picture_url.split('/images')[1];
         fs.unlink(`images/${filename}`, () => { //suppression de l'utilisateur complet
-          let deleteQuery = "DELETE FROM users where id = " + req.params.id;
+          let deleteQuery = "DELETE FROM users WHERE id = " + req.params.id;
             bdd.query(deleteQuery, function (err, result) {
               if (err) {res.status(400).json({ error : err.code });}
               else {res.status(200).json({ message: 'Votre compte utilisateur à été supprimé !'});}
