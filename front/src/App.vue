@@ -1,30 +1,33 @@
 <template>
-  <div id="nav">
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
+  <div id="app">
+    <router-view/>
+    <footer class="footer">
+      <p>{{ copyright }}</p>
+    </footer>
   </div>
-  <router-view/>
 </template>
+
+<script>
+export default {
+  computed: {
+		copyright() {
+			const currentYear = new Date().getFullYear()
+			return `© Copyright Groupomania ${currentYear}`
+		}
+  }
+}
+</script>
 
 <style lang="scss">
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  font-family: Times, Times New Roman, serif;
   text-align: center;
   color: #2c3e50;
 }
 
-#nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
+footer {
+  margin-top: 70px;
+  padding-bottom: 20px;
 }
+
 </style>
