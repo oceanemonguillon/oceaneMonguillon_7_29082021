@@ -85,12 +85,11 @@ export default {
 
 
 <style lang="scss">
-  img{
-    width: 20%;
-    height: auto;
-    margin:20px auto;
-
-  }
+#logo{
+  width: 20%;
+  height: auto;
+  margin:20px auto;
+}
 
 h2{
   color: black;
