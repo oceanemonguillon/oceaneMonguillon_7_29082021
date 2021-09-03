@@ -10,8 +10,10 @@
       <form id="formElement" @submit = "sendForm">
         <label for="mail"> Adresse e-mail : </label>
         <input @input = "checkForm" type="email" id="mail" name="email" required>
+        
         <label for="password">Mot de passe : </label>
         <input @input = "checkForm" type="password" id="password" name="password" minlength="8" required>
+        
         <input type="submit" id="connexion-btn" value="Connexion" disabled>
       </form>
     </div>
