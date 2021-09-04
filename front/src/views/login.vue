@@ -55,7 +55,7 @@ export default {
         headers: {'Content-Type': 'application/json'}
       };
       //récuperation de la bdd
-      fetch("http://localhost:3000/auth/login", options)
+      fetch("http://localhost:3000/user/login", options)
         .then (res => {//récuperation des données réussie
           if (res.status == 200) {res.json ()
             .then (json => {
@@ -125,11 +125,15 @@ h2{
 #connexion-btn {
   margin:10px auto;
   border: solid 2px black;
-  background-color: white;
+  background-color: black;
 	padding:10px;
 	border-radius:8px;
-  color: black;
+  color: white;
   font-size:20px;
+  &:disabled {
+    background: grey;
+    color: white;
+  }
 }
 
 a {
