@@ -65,7 +65,7 @@ export default {
             for (let i = 0; i < json.length; i++) { //il y a des posts
               let newDiv = document.createElement("div"); //création d'une div qui vas contenir un post
               newDiv.className = "post"; 
-              newDiv.addEventListener('click', () => {this.$router.push("post/"+json[i].id);})//au clic, redirection sur getOnePost
+              newDiv.addEventListener('click', () => {this.$router.push("/post/"+json[i].id);})//au clic, redirection sur getOnePost
               postsDiv.appendChild(newDiv); //div placées dans postsDiv
               
               //Affichage de la photo de profil et du pseudo en petit
@@ -78,7 +78,7 @@ export default {
               newPicture.alt = json[i].picture;
               newPicture.width = 50;
               newPicture.height = 60;
-              newPicture.setAttribute("class", "picture")
+              newPicture.setAttribute("class", "picture");
               pictureContainer.appendChild(newPicture);
       
               //Date de publication du post 

@@ -47,7 +47,7 @@ exports.getAllPosts = (req, res, next) => {
 //Fonction permettant de récuperer un seul post 
 exports.getOnePost = (req, res, next) => {
     //recuperation du post correspondant a l'id
-    let getOnePostQuery = `SELECT users.pseudo, users.picture_url, posts.title, posts.id, posts.text, TIMEDIFF(NOW(),Posts.date) as date FROM posts INNER JOIN users ON posts.user_id = users.id WHERE posts.id =${req.params.id}`;
+    let getOnePostQuery = `SELECT users.pseudo, users.picture_url, posts.title, posts.id, posts.text, TIMEDIFF(NOW(),posts.date) as date FROM posts INNER JOIN users ON posts.user_id = users.id WHERE posts.id =${req.params.id}`;
     bdd.query(getOnePostQuery, function (err, result) {
       if (err) throw err; //declare les erreurs
       else { //montre les post ciblé s'il existe
