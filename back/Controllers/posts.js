@@ -19,7 +19,7 @@ exports.createPost = (req, res, next) => {
 //fonction permettant de recuperer tout les posts
 exports.getAllPosts = (req, res, next) => {
     //recuperation des posts dans la bdd
-    let getAllPostsQuery = "SELECT users.pseudo, users.picture_url, posts.title, posts.id, TIMEDIFF(NOW(),posts.date) as date FROM posts INNER JOIN users ON posts.user_id = users.id ORDER BY `date` ASC";
+    let getAllPostsQuery = "SELECT users.pseudo, users.picture_url, posts.title, posts.text, posts.id, TIMEDIFF(NOW(),posts.date) as date FROM posts INNER JOIN users ON posts.user_id = users.id ORDER BY `date` ASC";
     bdd.query(getAllPostsQuery, function (err, result) {
       if (err) throw err; //declare les erreurs
       else {
@@ -30,6 +30,7 @@ exports.getAllPosts = (req, res, next) => {
               pseudo: result[i].pseudo,
               picture: result[i].picture_url,
               title: result[i].title,
+              text: result[i].text,
               id: result[i].id,
               date: result[i].date
             })
@@ -46,7 +47,7 @@ exports.getAllPosts = (req, res, next) => {
 //Fonction permettant de récuperer un seul post 
 exports.getOnePost = (req, res, next) => {
     //recuperation du post correspondant a l'id
-    let getOnePostQuery = `SELECT users.pseudo, users.picture_url, posts.title, posts.id, posts.link, posts.text, TIMEDIFF(NOW(),Posts.date) as date FROM posts INNER JOIN users ON posts.user_id = users.id WHERE posts.id =${req.params.id}`;
+    let getOnePostQuery = `SELECT users.pseudo, users.picture_url, posts.title, posts.id, posts.text, TIMEDIFF(NOW(),Posts.date) as date FROM posts INNER JOIN users ON posts.user_id = users.id WHERE posts.id =${req.params.id}`;
     bdd.query(getOnePostQuery, function (err, result) {
       if (err) throw err; //declare les erreurs
       else { //montre les post ciblé s'il existe
@@ -56,7 +57,6 @@ exports.getOnePost = (req, res, next) => {
               picture: result[0].picture_url,
               title: result[0].title,
               text: result[0].text,
-              link:result[0].link,
               id: result[0].id,
               date: result[0].date
             };
@@ -99,7 +99,7 @@ exports.getOnePost = (req, res, next) => {
 //Fonction de modification de l'objet post (requête PUT)
 exports.modifyPost = (req, res, next) => {
     //modification des données existantes
-    const putQuery = `UPDATE posts SET title = "${req.body.title}", text = "${req.body.text}", link = "${req.body.url}" where id = ${req.params.id}`;
+    const putQuery = `UPDATE posts SET title = "${req.body.title}", text = "${req.body.text}" WHERE id = ${req.params.id}`;
     bdd.query(putQuery, function (err, result) {
         if (!err) {res.status(200).json({ message: 'Post modifié !'})} //reussite de la modification
         else res.status(400).json({ error : err.code })     //declare les erreurs
