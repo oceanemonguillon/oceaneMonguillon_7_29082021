@@ -16,3 +16,45 @@
   </div>
 </template>
 
+<script>
+
+</script>
+
+
+<style lang="scss">
+#posts-header{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+  #logo{
+    width: 10%;
+    height: auto;
+    margin-left: 0%;
+    margin-top: 0%;
+  }
+  ul{
+    display: flex;
+    flex-direction: row;
+    list-style-type: none;
+    li{
+      margin-right: 15px;
+    }
+  }
+  .link{
+    color: black;
+    text-decoration: none;
+    font-weight: lighter;
+    &:hover{
+      color: red;
+    }
+  }
+}
+
+.hand{
+  color: red;
+}
+
+</style>
