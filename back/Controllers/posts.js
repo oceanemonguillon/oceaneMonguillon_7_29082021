@@ -7,7 +7,7 @@ const fs = require('fs');
 //fonction permettant de créer un post
 exports.createPost = (req, res, next) => {
     //insert les elements entrés dans la bdd
-    const postQuery = `INSERT INTO posts VALUES (NULL,"${req.body.userId}","${req.body.title}","${req.body.text}","","${req.body.url}", NOW())`;
+    const postQuery = `INSERT INTO posts VALUES (NULL,"${req.body.title}", "${req.body.text}", NOW(), "${req.body.userId}")`;
     bdd.query(postQuery, function (err, result) {
         if (!err) {res.status(201).json({ message: 'Post créé !' });} //message de réussite 
         else {res.status(400).json({ error: err.code });}       //message d'erreur
