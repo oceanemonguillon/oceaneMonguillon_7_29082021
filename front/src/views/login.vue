@@ -57,17 +57,12 @@ export default {
       //récuperation de la bdd
       fetch("http://localhost:3000/user/login", options)
         .then (res => {//récuperation des données réussie
-        console.log('p1');
           if (res.status == 200) {res.json ()    
             .then (json => {
-              console.log('p2');
               this.success=true;
-              console.log('p3');
               const userInfo = {id: json.id, pseudo: json.pseudo, token: json.token};
-              console.log('p4');
               //maintient de la connexion tant que l'utilisateur ne se deconnecte pas 
               localStorage.setItem('userInfo', JSON.stringify(userInfo));
-              console.log('p5');
               //connexion établie, page la page des publications apparait
               this.$router.push({ name: 'posts' }); 
             })
