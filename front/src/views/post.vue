@@ -91,7 +91,7 @@ export default {
                         newPicture.src = json.picture;
                         newPicture.alt = json.picture;
                         newPicture.width = 50;
-                        newPicture.height = 60;
+                        newPicture.height = 50;
                         newPicture.setAttribute("class", "picture");
                         pictureContainer.appendChild(newPicture);
                         
@@ -344,7 +344,7 @@ export default {
                                     const newP = document.createElement("p");
                                     const newSpan = document.createElement("span");
                                     //infos de l'utilisateur qui a écrit le com
-                                    newSpan.innerHTML = `<img src='${json[i].picture_url}' width='40' height='50' alt='photo de ${json[i].pseudo}'> <p class="commentPseudo"> ${json[i].pseudo}: </p>  ${json[i].comment}`;
+                                    newSpan.innerHTML = `<img src='${json[i].picture_url}' width='40' height='40' alt='photo de ${json[i].pseudo}'> <p class="commentPseudo"> ${json[i].pseudo}: </p>  ${json[i].comment}`;
                                     newSpan.setAttribute("class","whoComment");
                                     newP.setAttribute("class", "commentStyle");
                                     newP.appendChild(newSpan);

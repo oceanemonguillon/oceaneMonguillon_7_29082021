@@ -77,7 +77,7 @@ export default {
               newPicture.src = json[i].picture;
               newPicture.alt = json[i].picture;
               newPicture.width = 50;
-              newPicture.height = 60;
+              newPicture.height = 50;
               newPicture.setAttribute("class", "picture");
               pictureContainer.appendChild(newPicture);
       
