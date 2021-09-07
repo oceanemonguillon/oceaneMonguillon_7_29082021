@@ -5,6 +5,7 @@
       <nav id="nav">
         <ul>
           <li><router-link to="/posts" class="link">Accueil </router-link></li>
+          <li><router-link to="/addpost" id="add" class="link">Créer un Post </router-link></li>
           <li><router-link :to="'/user/'+id" class="link">Mon profil</router-link></li>
           <li class="disconnection link" @click = "disconnection"> Déconnexion </li>
         </ul>
