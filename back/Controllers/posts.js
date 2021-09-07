@@ -99,8 +99,8 @@ exports.getOnePost = (req, res, next) => {
 //Fonction de modification de l'objet post (requête PUT)
 exports.modifyPost = (req, res, next) => {
     //modification des données existantes
-    const putQuery = `UPDATE posts SET title = "${req.body.title}", text = "${req.body.text}" WHERE id = ${req.params.id}`;
-    bdd.query(putQuery, function (err, result) {
+    const modifyQuery = `UPDATE posts SET title = "${req.body.title}", text = "${req.body.text}" WHERE id = ${req.params.id}`;
+    bdd.query(modifyQuery, function (err, result) {
         if (!err) {res.status(200).json({ message: 'Post modifié !'})} //reussite de la modification
         else res.status(400).json({ error : err.code })     //declare les erreurs
     });

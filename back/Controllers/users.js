@@ -20,7 +20,7 @@ exports.signup = (req, res, next) => {
     if (Regexmdp.test(userInformations.password)) { //Si regex respecté
       bcrypt.hash(userInformations.password, 10) //mdp hashé 10x
       .then((hash) => { //Requête d'insertion des données dans la bdd
-        let signupQuery = "INSERT INTO users VALUES (NULL,'" + userInformations.pseudo + "','" + hash + "','" + userInformations.email + "','"+imageUrl+"',NULL)";
+        let signupQuery = "INSERT INTO users VALUES (NULL,'" + userInformations.pseudo + "','" + hash + "','" + userInformations.email + "','"+imageUrl+"',0)";
         
         bdd.query(signupQuery, function (err, result) { //vérifie que l'utilisateur n'existe pas déjà
           if (!err) {

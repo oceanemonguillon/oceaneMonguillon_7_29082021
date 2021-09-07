@@ -12,7 +12,7 @@
     </header>
     <h1>Modifiez votre post: </h1>
     <div class="card">
-        <form id="formElement" @submit="addPost">
+        <form id="formElement" @submit="modifyPost">
             <label for="title">Titre <span class="required">*</span> </label>
             <input @input = "checkForm" type="text" id="title" name="title" minlength="2" maxlength= "49" required>
             
@@ -27,4 +27,3 @@
     <p id="erreur" v-show="success===false">{{message}} </p>
   </div>
 </template>
-
