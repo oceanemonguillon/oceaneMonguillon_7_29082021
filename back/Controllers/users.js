@@ -60,11 +60,12 @@ exports.login = (req, res, next) => {
             res.status(200).json({ //Retourne l'id de l'utilisateur, le pseudo et le Token de celui-ci
               id: result[0].id,
               pseudo: result[0].pseudo,
+              role: result[0].role,
               token: jwt.sign({ userId: result[0].id },'RANDOM_TOKEN_SECRET',{ expiresIn: '24h' })
             });
           }
         })
-        .catch(error => res.status(500).json({ error: "le pb est la" }));
+        .catch(error => res.status(500).json({ error: "pb de récuperation de donnée" }));
       }
       else {res.status(401).json({ error: "l'utilisateur n'existe pas !" });}
     }

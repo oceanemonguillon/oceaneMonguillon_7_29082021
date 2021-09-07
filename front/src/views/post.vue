@@ -25,9 +25,9 @@
         <div class="allComments"></div>
 
         <button class = "button button__modify" v-if= "pseudo===postPseudo" @click= "modifyPost"> Modifier le post </button>
-        <button class ="button button__delete" v-if= "pseudo===postPseudo" @click= "deletePost" ><i class="fas fa-trash"></i> Supprimer le post </button>
+        <button class ="button button__delete" v-if= "pseudo===postPseudo || role=='admin'" @click= "deletePost" ><i class="fas fa-trash"></i> Supprimer le post </button>
 
-        <p id="erreur" v-show="success===false"> Echec de la requête : {{message}} </p>
+        <p id="erreur" v-show="success===false"> {{message}} </p>
 
     </section>
 
@@ -48,9 +48,10 @@ export default {
             postPseudo: "",
             userLike:false,
             userDislike:false,
-            numberOfComments: 0 
-        }
+            numberOfComments: 0,
+        };
     },
+
     //JS monté, refresh de la page
     mounted() {
         const userInfo = JSON.parse(localStorage.getItem('userInfo')); //récuperation des infos de l'utilisateur
@@ -58,12 +59,14 @@ export default {
             this.id = userInfo.id;
             this.pseudo = userInfo.pseudo;
             this.token = userInfo.token;
+            this.role = userInfo.role;
             //chargement du post (appel fonction)
             this.getOnePost();
         }
         else this.$router.push({ name: 'login' }); //sinon on le renvoie vers la page login
     },
     methods: {
+        
         getOnePost(){//fonction de recuperation d'un post dans la bdd           
             //Requete à la bdd
             const optionsGetPost = {
@@ -349,7 +352,7 @@ export default {
                                     newP.appendChild(newSpan);
                                     postsDiv.appendChild(newP);
 
-                                    if (this.pseudo == json[i].pseudo) { //suppression du commentaire par l'utilisateur
+                                    if (this.pseudo == json[i].pseudo || this.role=='admin') { //suppression du commentaire par l'utilisateur
                                         const newButton = document.createElement("button");
                                         newButton.setAttribute("type","button");
                                         newButton.setAttribute("class", "deleteComment");
@@ -439,7 +442,7 @@ export default {
         },
 
 
-
+        
         postComment() {//fonction de création de commentaire
             const postId = window.location.href.substr((window.location.href.lastIndexOf("/") + 1));
             if (document.getElementById("comment").checkValidity()) {//verification du com 

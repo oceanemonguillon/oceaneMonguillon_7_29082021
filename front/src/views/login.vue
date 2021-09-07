@@ -60,9 +60,10 @@ export default {
           if (res.status == 200) {res.json ()    
             .then (json => {
               this.success=true;
-              const userInfo = {id: json.id, pseudo: json.pseudo, token: json.token};
+              const userInfo = {id: json.id, pseudo: json.pseudo, token: json.token, role: json.role};
               //maintient de la connexion tant que l'utilisateur ne se deconnecte pas 
               localStorage.setItem('userInfo', JSON.stringify(userInfo));
+              console.log(userInfo);
               //connexion établie, page la page des publications apparait
               this.$router.push({ name: 'posts' }); 
             })

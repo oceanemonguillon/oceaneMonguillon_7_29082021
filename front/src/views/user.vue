@@ -80,7 +80,6 @@ export default {
             else {res.json ().then (() => {this.$router.push({ name: 'login' });})}//si pb, redirection vers page login
             })
             .catch (() => {//pb serveur, message d'erreur
-                this.waiting=false;
                 this.success= false;
                 this.message = "Veuillez nous excuser, un problème de serveur est survenu! Revenez plus tard :) !";
             })
