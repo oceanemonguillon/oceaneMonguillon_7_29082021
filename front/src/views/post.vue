@@ -73,7 +73,6 @@ export default {
                 }
             };
             const postId = window.location.href.substr((window.location.href.lastIndexOf("/") + 1));
-            this.waiting = true;
             fetch(`http://localhost:3000/posts/${postId}`, optionsGetPost)
             .then (res => {
                 if (res.status == 200) {//si données récupérées :
@@ -433,7 +432,6 @@ export default {
                         }
                     })
                     .catch (() => {//pb de serveur, message d'erreue
-                        this.waiting=false;
                         this.success= false;
                         this.message = "Veuillez nous excuser, un problème de serveur est survenu! Revenez plus tard :) !";
                     })
