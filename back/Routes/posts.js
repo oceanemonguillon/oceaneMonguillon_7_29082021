@@ -4,8 +4,7 @@ const express = require('express');
 const router = express.Router();
 //Import du middleware de sécurisation des routes (auth)
 const auth = require('../middleware/auth');
-//Import du middleware de sécurisation Admin (admin)
-const admin = require('../middleware/admin');
+
 //import de la page posts des controllers
 const postsCtrl = require('../controllers/posts');
 
@@ -20,7 +19,7 @@ router.get('/:id', auth, postsCtrl.getOnePost);
 //fonction permettant demodifier un post
 router.put('/:id', auth, postsCtrl.modifyPost);
 //fonction permettant de supprimer un post
-router.delete('/:id', auth, admin, postsCtrl.deletePost);
+router.delete('/:id', auth, postsCtrl.deletePost);
 //fonction permettant de liker un post
 router.post('/:id/like', auth, postsCtrl.likePost);
 //fonction permettant de commenter un post
@@ -28,7 +27,7 @@ router.post('/:id/comment', auth, postsCtrl.commentPost);
 //fonction permettant de recuperer un commentaire
 router.get('/:id/comment', auth, postsCtrl.getComments);
 //fonction permettant de supprimer un commentaire
-router.delete('/:id/comment', auth, admin, postsCtrl.deleteComment);
+router.delete('/:id/comment', auth, postsCtrl.deleteComment);
 
 
 

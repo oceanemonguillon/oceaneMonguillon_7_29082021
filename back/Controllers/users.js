@@ -60,7 +60,7 @@ exports.login = (req, res, next) => {
             res.status(200).json({ //Retourne l'id de l'utilisateur, le pseudo et le Token de celui-ci
               id: result[0].id,
               pseudo: result[0].pseudo,
-              role: result[0].role,
+              role: result[0].role,//ajout du role pour les droits admin
               token: jwt.sign({ userId: result[0].id },'RANDOM_TOKEN_SECRET',{ expiresIn: '24h' })
             });
           }
