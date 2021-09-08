@@ -20,7 +20,7 @@ exports.signup = (req, res, next) => {
     if (Regexmdp.test(userInformations.password)) { //Si regex respecté
       bcrypt.hash(userInformations.password, 10) //mdp hashé 10x
       .then((hash) => { //Requête d'insertion des données dans la bdd
-        let signupQuery = "INSERT INTO users VALUES (NULL,'" + userInformations.pseudo + "','" + hash + "','" + userInformations.email + "','"+imageUrl+"',0)";
+        let signupQuery = "INSERT INTO users VALUES (NULL,'" + userInformations.pseudo + "','" + hash + "','" + userInformations.email + "','"+imageUrl+"','user')";
         
         bdd.query(signupQuery, function (err, result) { //vérifie que l'utilisateur n'existe pas déjà
           if (!err) {
@@ -124,7 +124,7 @@ exports.deleteUser = (req, res, next) => {
     bdd.query(deletePictureQuery, function (err, result) {
       if (err) {res.status(400).json({ error : err.code });}
       else {
-        const filename = result[0].picture_url.split('/images')[1];
+        const filename = result[0].picture_url.split('/images/')[1];
         fs.unlink(`images/${filename}`, () => { //suppression de l'utilisateur complet
           let deleteQuery = "DELETE FROM users WHERE id = " + req.params.id;
             bdd.query(deleteQuery, function (err, result) {

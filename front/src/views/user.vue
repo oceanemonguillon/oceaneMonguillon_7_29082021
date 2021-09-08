@@ -12,7 +12,7 @@
       </nav>
     </header>
     <h1>{{pseudo}}, voici votre profil</h1>
-    <div id="profilDiv"></div>
+    <div id="profilDiv" class="card"></div>
 
     <button class="button button__modify modifyPicture" v-if="id==urlId" @click="modifyUser"> Modifier ma photo de profil </button>
     <button class="button button__delete deleteCount" v-if="id==urlId" @click="deleteUser"> Supprimer mon compte </button>
@@ -204,3 +204,11 @@ export default {
     }
 }
 </script>
+
+<style lang="scss">
+#profileImage{
+    width: 30%;
+    height: auto;
+}
+
+</style>
