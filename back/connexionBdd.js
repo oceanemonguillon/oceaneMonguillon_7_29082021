@@ -1,12 +1,14 @@
 //import du package mysql
 const mysql = require('mysql');
+//import .env
+require('dotenv').config()
 
 // Connexion à MYSQL
 const bdd = mysql.createConnection({
-  host: '192.168.64.2',
-  user: 'oceane3',
-  password: 'password',
-  database: 'bddGroupomania',
+  host: process.env.BDD_HOST,
+  user: process.env.BDD_USER,
+  password: process.env.BDD_PASS,
+  database: process.env.BDD_DATABASE,
   namedPlaceholders: true,
 });
 
