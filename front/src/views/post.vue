@@ -505,6 +505,7 @@ section {
     margin:30px auto;
     background-color: white;
     padding:5px;
+    border-radius: 20px;
     p{
         width: 95%;
         word-break: break-all;
