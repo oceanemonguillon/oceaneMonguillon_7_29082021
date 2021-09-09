@@ -9,8 +9,8 @@
       <h2> Se connecter </h2>
       <form id="formElement" @submit = "sendForm">
         <label for="mail"> Adresse e-mail : </label>
-        <input @input = "checkForm" type="email" id="mail" name="email" required>
-        
+        <input @input = "checkForm" type="email" id="mail" name="email" required>      
+       
         <label for="password">Mot de passe : </label>
         <input @input = "checkForm" type="password" id="password" name="password" minlength="8" required>
         
@@ -63,7 +63,6 @@ export default {
               const userInfo = {id: json.id, pseudo: json.pseudo, token: json.token, role: json.role};
               //maintient de la connexion tant que l'utilisateur ne se deconnecte pas 
               localStorage.setItem('userInfo', JSON.stringify(userInfo));
-              console.log(userInfo);
               //connexion établie, page la page des publications apparait
               this.$router.push({ name: 'posts' }); 
             })

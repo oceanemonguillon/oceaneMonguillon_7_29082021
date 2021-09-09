@@ -4,10 +4,10 @@
       <img alt="logo" src="../assets/logo.png" id="logo">
       <nav id="nav">
         <ul>
-          <li><router-link to="/posts" class="link"> Accueil</router-link></li>
-          <li><router-link to="/addpost" id="add" class="link">Créer un Post </router-link></li>
-          <li><router-link :to="'/user/'+id" class="link">Mon profil</router-link></li>
-          <li class="disconnection link" @click = "disconnection"> Déconnexion </li>
+          <li><router-link to="/posts" class="link" title="Accueil"><i class="fas fa-home"></i></router-link></li>
+          <li><router-link to="/addpost" id="add" class="link" title="Créer un post"><i class="fas fa-plus"></i> </router-link></li>
+          <li><router-link :to="'/user/'+id" class="link" title="Mon profil"><i class="fas fa-user-circle"></i></router-link></li>
+          <li class="disconnection link" @click = "disconnection" title="Deconnexion"> <i class="fas fa-sign-out-alt"></i> </li>
         </ul>
       </nav>
     </header>
@@ -200,7 +200,7 @@ export default {
                             .then (() => {
                                 this.success=true;
                                 alert("Vous avez enlevé votre like! :) ");
-                                window.location.reload(); //rapel de la fonction pour refresh
+                                location.reload(); //rapel de la fonction pour refresh
                             })
                         }
                         else {res.json ()
@@ -229,7 +229,7 @@ export default {
                             .then (() => {
                                 this.success=true;
                                 alert("Vous avez liké! :) ");
-                                window.location.reload();//rappel de la fonction pour refresh
+                                location.reload();//rappel de la fonction pour refresh
                             })
                         }
                         else {res.json ()//like n'as pas fonctionné, message d'erreur
@@ -263,7 +263,7 @@ export default {
                             .then (() => {
                                 this.success=true;
                                 alert("vous avez enlevé votre dislike: :)");
-                                window.location.reload();//rapel de la fonction pour refresh
+                                location.reload();//rapel de la fonction pour refresh
                             })
                         }
                         else {res.json ()//dé-dislike n'as pas marché, message d'erreur
@@ -292,7 +292,7 @@ export default {
                             .then (() => {
                                 this.success=true;
                                 alert("Vous avez disliké! :)");
-                                window.location.reload();//rapel de la fonction pour refresh
+                                location.reload();//rapel de la fonction pour refresh
                             })
                         }
                         else {res.json ()//dislike n'as pas marché, message d'erreur
@@ -352,7 +352,7 @@ export default {
                                     newP.appendChild(newSpan);
                                     postsDiv.appendChild(newP);
 
-                                    if (this.pseudo == json[i].pseudo || this.role=='admin') { //suppression du commentaire par l'utilisateur ou l'admin
+                                    if (this.pseudo == json[i].pseudo) { //suppression du commentaire par l'utilisateur
                                         const newButton = document.createElement("button");
                                         newButton.setAttribute("type","button");
                                         newButton.setAttribute("class", "deleteComment");
@@ -373,7 +373,7 @@ export default {
                                                         alert("Vous avez supprimé un commentaire!");
                                                         newP.remove();//suppression du com sur la page
                                                         this.numberOfComments--;//enleve 1 commentaire au total
-                                                        window.location.reload();//refresh de la page en appelant la fonction 
+                                                        location.reload();//refresh de la page en appelant la fonction 
                                                     })
                                                 }
                                                 else {res.json ()//erreur lors de la suppression 
@@ -461,7 +461,7 @@ export default {
                             .then (() => {
                                 this.success=true;
                                 alert("Vous avez écrit un commentaire :) !");
-                                window.location.reload();//refresh de la page avec l'appel de fonction 
+                                location.reload();//refresh de la page avec l'appel de fonction 
                             })
                         }
                         else {res.json ()//echec de l'envoie
@@ -489,7 +489,12 @@ section {
 @media screen and (max-width: 600px) {
   section {width:90%;}
 }
-
+.fa-home{
+    font-size: 25px;
+}
+.fa-sign-out-alt{
+    font-size: 25px;
+}
 #post {
     display: flex;
     flex-direction: column;

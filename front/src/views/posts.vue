@@ -4,9 +4,9 @@
       <img alt="logo" src="../assets/logo.png" id="logo">
       <nav id="nav">
         <ul>
-          <li><router-link to="/addpost" id="add" class="link">Créer un Post </router-link></li>
-          <li><router-link :to="'/user/'+id" class="link">Mon profil</router-link></li>
-          <li class="disconnection link" @click = "disconnection"> Déconnexion </li>
+          <li><router-link to="/addpost" id="add" class="link" title="Créer un post"><i class="fas fa-plus"></i> </router-link></li>
+          <li><router-link :to="'/user/'+id" class="link" title="Mon profil"><i class="fas fa-user-circle"></i></router-link></li>
+          <li class="disconnection link" @click = "disconnection" title="Deconnexion"> <i class="fas fa-sign-out-alt"></i> </li>
         </ul>
       </nav>
     </header>
@@ -158,6 +158,12 @@ export default {
     li{
       margin-right: 15px;
     }
+  }
+  .fa-plus{
+    font-size: 25px;
+  }
+  .fa-user-circle{
+    font-size: 25px;
   }
   .link{
     color: black;
