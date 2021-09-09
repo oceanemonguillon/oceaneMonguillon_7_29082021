@@ -191,6 +191,7 @@ export default {
   width:60%;
   height: auto;
   background-color: white;
+  border-radius: 20px;
   transform: scale(1);
   transition: all 400ms;
   &:hover { 
