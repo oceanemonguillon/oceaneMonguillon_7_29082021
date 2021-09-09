@@ -352,7 +352,7 @@ export default {
                                     newP.appendChild(newSpan);
                                     postsDiv.appendChild(newP);
 
-                                    if (this.pseudo == json[i].pseudo) { //suppression du commentaire par l'utilisateur
+                                    if (this.pseudo == json[i].pseudo || this.role=='admin') { //suppression du commentaire par l'utilisateur
                                         const newButton = document.createElement("button");
                                         newButton.setAttribute("type","button");
                                         newButton.setAttribute("class", "deleteComment");
